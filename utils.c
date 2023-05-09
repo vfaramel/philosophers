@@ -6,7 +6,7 @@
 /*   By: vfaramel <vfaramel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 04:11:14 by vfaramel          #+#    #+#             */
-/*   Updated: 2023/05/05 08:25:07 by vfaramel         ###   ########.fr       */
+/*   Updated: 2023/05/09 03:32:02 by vfaramel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	get_settings(int argc, char **argv, t_settings *settings)
 	int	i;
 
 	i = 0;
-	settings->step = 0;
 	while (++i < argc)
 	{
 		if (!ft_isdigit(argv[i]))
@@ -75,6 +74,6 @@ void	get_settings(int argc, char **argv, t_settings *settings)
 	settings->max_eat = -1;
 	if (argc == 6)
 		settings->max_eat = ft_atoi(argv[5]);
-	settings->step++;
-
+	settings->threads_created = 0;
+	settings->a_philo_died = 0;
 }
