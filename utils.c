@@ -6,7 +6,7 @@
 /*   By: vfaramel <vfaramel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 04:11:14 by vfaramel          #+#    #+#             */
-/*   Updated: 2023/05/09 03:32:02 by vfaramel         ###   ########.fr       */
+/*   Updated: 2023/05/11 05:22:13 by vfaramel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	ft_atoi(const char *str)
 
 void	get_settings(int argc, char **argv, t_settings *settings)
 {
-	int	i;
+	int				i;
+	pthread_mutex_t	settings_mutex;
 
 	i = 0;
 	while (++i < argc)
@@ -67,13 +68,14 @@ void	get_settings(int argc, char **argv, t_settings *settings)
 		if (!ft_isdigit(argv[i]))
 			quit(settings);
 	}
+	pthread_mutex_init(&settings_mutex, NULL);
 	settings->num_of_philo = ft_atoi(argv[1]);
 	settings->time_to_die = ft_atoi(argv[2]);
 	settings->time_to_eat = ft_atoi(argv[3]);
 	settings->time_to_sleep = ft_atoi(argv[4]);
-	settings->max_eat = -1;
+	settings->max_meals = -1;
 	if (argc == 6)
-		settings->max_eat = ft_atoi(argv[5]);
-	settings->threads_created = 0;
-	settings->a_philo_died = 0;
+		settings->max_meals = ft_atoi(argv[5]);
+	settings->max_meals_count = 0;
+	settings->settings_mutex = &settings_mutex;
 }
